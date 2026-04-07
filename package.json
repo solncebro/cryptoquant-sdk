@@ -1,0 +1,61 @@
+{
+  "name": "@solncebro/cryptoquant-sdk",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for CryptoQuant API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "author": "solncebro",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solncebro/cryptoquant-sdk.git"
+  },
+  "homepage": "https://github.com/solncebro/cryptoquant-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/solncebro/cryptoquant-sdk/issues"
+  },
+  "keywords": [
+    "cryptoquant",
+    "crypto",
+    "api",
+    "sdk",
+    "typescript",
+    "on-chain",
+    "bitcoin",
+    "ethereum",
+    "exchange-flows",
+    "network-data"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    "test": "tsx test.ts",
+    "prepublishOnly": "yarn build && yarn lint && yarn format:check"
+  },
+  "packageManager": "yarn@4.9.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.6"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.57.1",
+    "@typescript-eslint/parser": "^8.57.1",
+    "eslint": "^10.0.3",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
