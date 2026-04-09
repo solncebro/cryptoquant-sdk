@@ -1,4 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance } from 'axios';
+import { BuildRequestUrlArgs } from './client.types';
 import { CryptoQuantApiResponse, CryptoQuantError } from './types/common';
 
 function camelToSnake(value: string): string {
@@ -43,6 +44,18 @@ function toRecord(params: object): Record<string, unknown> {
   return params as Record<string, unknown>;
 }
 
+function buildRequestUrl(config: BuildRequestUrlArgs): string {
+  const { baseURL = '', url = '', params } = config;
+  const query = params
+    ? '?' +
+      Object.entries(params as Record<string, unknown>)
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&')
+    : '';
+
+  return `${baseURL}${url}${query}`;
+}
+
 class CryptoQuantClient {
   private readonly instance: AxiosInstance;
 
@@ -54,24 +67,31 @@ class CryptoQuantClient {
       },
     });
 
-    this.instance.interceptors.response.use((response) => {
-      const body = response.data as CryptoQuantApiResponse<unknown>;
+    this.instance.interceptors.response.use(
+      (response) => {
+        const body = response.data as CryptoQuantApiResponse<unknown>;
 
-      if (body.status.code !== 200) {
-        const { baseURL = '', url = '', params } = response.config;
-        const query = params
-          ? '?' +
-            Object.entries(params as Record<string, unknown>)
-              .map(([key, value]) => `${key}=${value}`)
-              .join('&')
-          : '';
-        const requestUrl = `${baseURL}${url}${query}`;
+        if (body.status.code !== 200) {
+          const requestUrl = buildRequestUrl(response.config);
 
-        throw new CryptoQuantError(body.status.code, body.status.message, requestUrl);
-      }
+          throw new CryptoQuantError(body.status.code, body.status.message, requestUrl);
+        }
 
-      return response;
-    });
+        return response;
+      },
+      (error: AxiosError<CryptoQuantApiResponse<unknown>>) => {
+        if (error.response) {
+          const requestUrl = buildRequestUrl(error.config ?? {});
+          const body = error.response.data;
+          const code = body?.status?.code ?? error.response.status;
+          const message = body?.status?.message ?? error.message;
+
+          throw new CryptoQuantError(code, message, requestUrl);
+        }
+
+        throw error;
+      },
+    );
   }
 
   async get<T>(path: string, params?: object): Promise<T[]> {

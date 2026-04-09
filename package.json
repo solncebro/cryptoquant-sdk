@@ -1,6 +1,6 @@
 {
   "name": "@solncebro/cryptoquant-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript SDK for CryptoQuant API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,12 +35,12 @@
     "network-data"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && eslint src/",
     "lint": "eslint src/",
     "format": "prettier --write src/",
     "format:check": "prettier --check src/",
     "test": "tsx test.ts",
-    "prepublishOnly": "yarn build && yarn lint && yarn format:check"
+    "prepublishOnly": "yarn build && yarn format:check"
   },
   "packageManager": "yarn@4.9.1",
   "publishConfig": {
