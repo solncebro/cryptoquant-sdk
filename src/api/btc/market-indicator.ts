@@ -1,13 +1,13 @@
 import { CryptoQuantClient } from '../../client';
 import type { BaseParams, ExchangeParams, EstimatedLeverageRatioData } from '../../types/common';
 import type {
-  StablecoinSupplyRatioData,
-  MarketValueToRealizedValueData,
-  SpentOutputProfitRatioData,
-  SpentOutputProfitRatioRatioData,
-  RealizedPriceData,
-  UnspentTransactionOutputRealizedPriceAgeDistributionData,
-  ProfitAndLossIndexData,
+  StablecoinSupplyRatioDataRaw,
+  MarketValueToRealizedValueDataRaw,
+  SpentOutputProfitRatioDataRaw,
+  SpentOutputProfitRatioRatioDataRaw,
+  RealizedPriceDataRaw,
+  UnspentTransactionOutputRealizedPriceAgeDistributionDataRaw,
+  ProfitAndLossIndexDataRaw,
 } from '../../types/btc';
 
 class BtcMarketIndicatorApi {
@@ -16,7 +16,7 @@ class BtcMarketIndicatorApi {
     private readonly basePath: string,
   ) {}
 
-  async getStablecoinSupplyRatio(params?: BaseParams): Promise<StablecoinSupplyRatioData[]> {
+  async getStablecoinSupplyRatio(params?: BaseParams): Promise<StablecoinSupplyRatioDataRaw[]> {
     return this.client.get(`${this.basePath}/stablecoin-supply-ratio`, params);
   }
 
@@ -26,31 +26,31 @@ class BtcMarketIndicatorApi {
 
   async getMarketValueToRealizedValue(
     params?: BaseParams,
-  ): Promise<MarketValueToRealizedValueData[]> {
+  ): Promise<MarketValueToRealizedValueDataRaw[]> {
     return this.client.get(`${this.basePath}/mvrv`, params);
   }
 
-  async getSpentOutputProfitRatio(params?: BaseParams): Promise<SpentOutputProfitRatioData[]> {
+  async getSpentOutputProfitRatio(params?: BaseParams): Promise<SpentOutputProfitRatioDataRaw[]> {
     return this.client.get(`${this.basePath}/sopr`, params);
   }
 
   async getSpentOutputProfitRatioRatio(
     params?: BaseParams,
-  ): Promise<SpentOutputProfitRatioRatioData[]> {
+  ): Promise<SpentOutputProfitRatioRatioDataRaw[]> {
     return this.client.get(`${this.basePath}/sopr-ratio`, params);
   }
 
-  async getRealizedPrice(params?: BaseParams): Promise<RealizedPriceData[]> {
+  async getRealizedPrice(params?: BaseParams): Promise<RealizedPriceDataRaw[]> {
     return this.client.get(`${this.basePath}/realized-price`, params);
   }
 
   async getUnspentTransactionOutputRealizedPriceAgeDistribution(
     params?: BaseParams,
-  ): Promise<UnspentTransactionOutputRealizedPriceAgeDistributionData[]> {
+  ): Promise<UnspentTransactionOutputRealizedPriceAgeDistributionDataRaw[]> {
     return this.client.get(`${this.basePath}/utxo-realized-price-age-distribution`, params);
   }
 
-  async getProfitAndLossIndex(params?: BaseParams): Promise<ProfitAndLossIndexData[]> {
+  async getProfitAndLossIndex(params?: BaseParams): Promise<ProfitAndLossIndexDataRaw[]> {
     return this.client.get(`${this.basePath}/pnl-index`, params);
   }
 }

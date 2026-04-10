@@ -168,32 +168,36 @@ interface MarketCapToActiveData extends TimeFieldData {
   marketCapToActive: number;
 }
 
-interface StablecoinSupplyRatioData extends TimeFieldData {
-  stablecoinSupplyRatio: number;
+interface StablecoinSupplyRatioDataRaw extends TimeFieldData {
+  stablecoinSupplyRatio: string;
 }
 
-interface MarketValueToRealizedValueData extends TimeFieldData {
-  marketValueToRealizedValue: number;
+interface MarketValueToRealizedValueDataRaw extends TimeFieldData {
+  mvrv: number;
 }
 
-interface SpentOutputProfitRatioData extends TimeFieldData {
-  spentOutputProfitRatio: number;
+interface SpentOutputProfitRatioDataRaw extends TimeFieldData {
+  sopr: number;
+  aSopr?: number;
+  sthSopr?: number;
+  lthSopr?: number;
 }
 
-interface SpentOutputProfitRatioRatioData extends TimeFieldData {
-  spentOutputProfitRatioRatio: number;
+interface SpentOutputProfitRatioRatioDataRaw extends TimeFieldData {
+  soprRatio: number;
 }
 
-interface RealizedPriceData extends TimeFieldData {
+interface RealizedPriceDataRaw extends TimeFieldData {
   realizedPrice: number;
 }
 
-interface UnspentTransactionOutputRealizedPriceAgeDistributionData extends TimeFieldData {
+interface UnspentTransactionOutputRealizedPriceAgeDistributionDataRaw extends TimeFieldData {
   [bucket: string]: number | string | undefined;
 }
 
-interface ProfitAndLossIndexData extends TimeFieldData {
-  profitAndLossIndex: number;
+interface ProfitAndLossIndexDataRaw extends TimeFieldData {
+  pnlIndex: number;
+  bullBearIndicator: number;
 }
 
 interface MinerCompaniesData extends TimeFieldData {
@@ -259,13 +263,13 @@ export type {
   UnspentTransactionOutputRealizedSupplyDistributionData,
   NetRealizedProfitLossData,
   MarketCapToActiveData,
-  StablecoinSupplyRatioData,
-  MarketValueToRealizedValueData,
-  SpentOutputProfitRatioData,
-  SpentOutputProfitRatioRatioData,
-  RealizedPriceData,
-  UnspentTransactionOutputRealizedPriceAgeDistributionData,
-  ProfitAndLossIndexData,
+  StablecoinSupplyRatioDataRaw,
+  MarketValueToRealizedValueDataRaw,
+  SpentOutputProfitRatioDataRaw,
+  SpentOutputProfitRatioRatioDataRaw,
+  RealizedPriceDataRaw,
+  UnspentTransactionOutputRealizedPriceAgeDistributionDataRaw,
+  ProfitAndLossIndexDataRaw,
   MinerCompaniesData,
   MempoolParams,
   MempoolStatsData,

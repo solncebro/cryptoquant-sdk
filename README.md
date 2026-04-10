@@ -192,6 +192,34 @@ interface TimeFieldData {
 
 Keys are automatically converted from `snake_case` (API) to `camelCase` (SDK).
 
+Some BTC market indicator types use the `DataRaw` suffix — their field names match the API abbreviations (`sopr`, `mvrv`, `pnlIndex`) rather than expanded names:
+
+```typescript
+import type {
+  SpentOutputProfitRatioDataRaw, // { sopr, aSopr?, sthSopr?, lthSopr? }
+  MarketValueToRealizedValueDataRaw, // { mvrv }
+  ProfitAndLossIndexDataRaw, // { pnlIndex, bullBearIndicator }
+} from '@solncebro/cryptoquant-sdk';
+```
+
+## Changelog
+
+### 1.1.0
+
+- Fixed BTC market indicator response types to match actual API field names (`mvrv`, `sopr`, `soprRatio`, `pnlIndex` instead of expanded names)
+- Added missing fields: `aSopr`, `sthSopr`, `lthSopr` to SOPR data; `bullBearIndicator` to PNL index data
+- Changed `stablecoinSupplyRatio` field type from `number` to `string`
+- Renamed affected types with `DataRaw` suffix (`StablecoinSupplyRatioDataRaw`, `MarketValueToRealizedValueDataRaw`, etc.)
+
+### 1.0.1
+
+- Improved error handling: HTTP errors (4xx, 5xx) are now converted to `CryptoQuantError` instead of raw `AxiosError`
+- Extracted `buildRequestUrl` utility for consistent error URL reporting
+
+### 1.0.0
+
+- Initial release: 248 typed endpoints across 7 assets (BTC, ETH, XRP, TRX, Stablecoin, ERC20, Alt)
+
 ## License
 
 MIT

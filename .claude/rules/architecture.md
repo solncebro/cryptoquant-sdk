@@ -7,13 +7,14 @@ globs: src/**/*.ts
 
 ## Слои
 
-1. **client** (`src/client.ts`) — Axios HTTP-клиент
+1. **client** (`src/client.ts`, `src/client.types.ts`) — Axios HTTP-клиент
    - BaseURL: `https://api.cryptoquant.com`
    - Заголовок `Authorization: Bearer {accessToken}`
-   - Response interceptor: проверяет `status.code !== 200` и бросает `CryptoQuantError`
+   - Response interceptor (success): проверяет `status.code !== 200` и бросает `CryptoQuantError`
+   - Error interceptor: перехватывает HTTP-ошибки (4xx, 5xx) и конвертирует `AxiosError` в `CryptoQuantError`
    - Метод `get<T>(path, params?)` конвертирует camelCase→snake_case для параметров и snake_case→camelCase для ответа
    - Возвращает `T[]` (массив из `result.data`)
-   - Утилиты: `camelToSnake`, `snakeToCamel`, `convertKeysToSnakeCase`, `convertKeysToCamelCase`
+   - Утилиты: `camelToSnake`, `snakeToCamel`, `convertKeysToSnakeCase`, `convertKeysToCamelCase`, `buildRequestUrl`
 
 2. **types** (`src/types/*.ts`) — все интерфейсы и enum'ы
    - `common.ts` — базовые типы (WindowEnum, FormatEnum, BaseParams, ExchangeParams, MinerParams, TokenExchangeParams, TokenParams, FundSymbolParams, SymbolMarketParams, TokenMarketParams, InterEntityFlowsParams, общие response-типы, CryptoQuantError)

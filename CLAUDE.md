@@ -40,15 +40,15 @@ src/
 
 ## Ключевые команды
 
-- `yarn build` — компиляция TypeScript в dist/
-- `yarn lint` — проверка ESLint
+- `yarn build` — компиляция TypeScript в dist/ + ESLint проверка
+- `yarn lint` — только ESLint проверка
 - `yarn format` — форматирование Prettier
 - `yarn format:check` — проверка форматирования
 - `yarn test` — запуск test.ts (нужен accessToken)
 
 ## Правила именования
 
-- Типы: суффикс `Params` (запросы), `Data` (ответы), `Enum` (перечисления)
+- Типы: суффикс `Params` (запросы), `Data` (ответы), `DataRaw` (ответы с сырыми именами полей API), `Enum` (перечисления)
 - Аббревиатуры как слова: `PriceOhlcvData`, `EthApi`, `NvtData`
 - Базовые классы в `src/api/shared/`, расширения через наследование в `src/api/{asset}/`
 - Все типы параметров и ответов определены в `src/types/`
@@ -62,4 +62,4 @@ src/
 2. Добавить метод в соответствующий API-класс в `src/api/<asset>/`
 3. Если нужен новый модуль — создать файл и подключить в `src/api/<asset>/index.ts`
 4. Реэкспортировать типы через `src/types/index.ts` если нужно
-5. `yarn build && yarn lint && yarn format:check`
+5. `yarn build && yarn format:check`

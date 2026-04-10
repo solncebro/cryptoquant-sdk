@@ -8,6 +8,7 @@ globs: src/**/*.ts
 ## Типы
 
 - Response-тип: `{MetricName}Data` (например `HashrateData`, `ReserveData`)
+- Response-тип с сырыми именами полей API: `{MetricName}DataRaw` (например `SpentOutputProfitRatioDataRaw` — поля `sopr`, `aSopr` вместо развёрнутых имён)
 - Param-тип: `{Context}Params` (например `ExchangeParams`, `MinerParams`)
 - Enum: `{Name}Enum` (например `WindowEnum`, `FormatEnum`)
 - Asset-специфический response-тип: `{Asset}{MetricName}Data` или `{MetricName}Data` если уникален (например `EthBlockBytesData`, `NvtData`)

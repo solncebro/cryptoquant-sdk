@@ -42,7 +42,7 @@ async getNewMetric(params?: BaseParams): Promise<NewMetricData[]> {
 ## Шаг 4: Проверка
 
 ```bash
-yarn build && yarn lint && yarn format:check
+yarn build && yarn format:check
 ```
 
 ## Типовые param-типы
@@ -59,5 +59,5 @@ yarn build && yarn lint && yarn format:check
 
 - Класс: `{Asset}{Category}Api` (например `BtcMempoolApi`)
 - Метод: `get{MetricName}` в camelCase
-- Тип ответа: `{MetricName}Data`
+- Тип ответа: `{MetricName}Data` или `{MetricName}DataRaw` (если поля API используют сокращённые имена вроде `sopr`, `mvrv`)
 - Путь API: kebab-case (`/metric-name`)
